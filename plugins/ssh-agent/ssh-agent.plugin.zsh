@@ -48,7 +48,7 @@ function _add_identities() {
 		fi
 	done
 
-	[[ -n "$not_loaded" ]] && ssh-add ${^not_loaded}
+#[[ -n "$not_loaded" ]] && ssh-add ${^not_loaded}
 }
 
 # Get the filename to store/lookup the environment from
@@ -75,8 +75,15 @@ else
 	_start_agent
 fi
 
+<<<<<<< HEAD
 _add_identities
 
 # tidy up after ourselves
 unset _agent_forwarding _ssh_env_cache
 unfunction _start_agent _add_identities
+=======
+# tidy up after ourselves
+unfunction _plugin__start_agent
+unset _plugin__forwarding
+unset _plugin__ssh_env
+>>>>>>> 400bb753... do not mess with ssh-agent identites
