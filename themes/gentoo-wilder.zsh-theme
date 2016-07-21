@@ -1,3 +1,4 @@
+#! /bin/zsh
 function prompt_char {
 	if [ $UID -eq 0 ]; then echo "#" && return;
 	fi
@@ -9,13 +10,43 @@ function get_nr_jobs() {
   repeat $(jobs | wc -l) printf '▶'
 }
 
-PROMPT='%(!.%{$fg_bold[red]%}.%{$fg_bold[green]%}%n@)%m %{$fg_bold[blue]%}%(!.%1~.%~)$(git_prompt_info)$(git_commits_ahead)%_ $(prompt_char)%{$reset_color%} '
+# Solarized
+solarized_base03=$'\e[1;30m'
+solarized_base02=$'\e[0;30m'
+solarized_base01=$'\e[1;32m'
+solarized_base00=$'\e[1;33m'
+solarized_base0=$'\e[1;34m'
+solarized_base1=$'\e[1;36m'
+solarized_base2=$'\e[0;37m'
+solarized_base3=$'\e[1;37m'
 
-RPROMPT='%{$fg_bold[green]%}$(get_nr_jobs)%{$reset_color%}'
+solarized_yellow=$'\e[0;33m'
+solarized_orange=$'\e[1;31m'
+solarized_red=$'\e[0;31m'
+solarized_magenta=$'\e[0;35m'
+solarized_violet=$'\e[1;35m'
+solarized_blue=$'\e[0;34m'
+solarized_cyan=$'\e[0;36m'
+solarized_green=$'\e[0;32m'
 
-ZSH_THEME_GIT_PROMPT_PREFIX="%{\033[0;36m%}·"
+dir_tint=$solarized_blue
+jobs_tint=$solarized_green
+
+# newline
+PROMPT=$'
+%{\033[1;32m%}│%{$reset_color%} '
+
+# add username only from remote
+[[ "$SSH_CONNECTION" != '' ]] && PROMPT+=$'%(!.%{\e[0;34m%}%}.%{\e[0;32m%}%}%n@)%m '
+
+PROMPT+=$'%{$dir_tint%}%(!.%1~.%~)%{$reset_color%}$(git_prompt_info)$(git_commits_ahead)%_
+%{\033[1;32m%}│ $(prompt_char)%{$reset_color%} '
+
+RPROMPT=$'%{$jobs_tint%}$(get_nr_jobs)%{$reset_color%}'
+
+ZSH_THEME_GIT_PROMPT_PREFIX="%{\033[1;32m%} · %{\033[0;36m%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$fg_bold[blue]%}"
-ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[green]%}!"
+ZSH_THEME_GIT_PROMPT_DIRTY="%{\e[0;35m%} !"
 ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[green]%}?"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
 ZSH_THEME_GIT_COMMITS_AHEAD_PREFIX="%{\033[0;36m%} "
