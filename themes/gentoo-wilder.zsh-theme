@@ -1,11 +1,4 @@
 #! /bin/zsh
-function prompt_char {
-	if [ $UID -eq 0 ]; then echo "#" && return;
-	fi
-        git branch >/dev/null 2>/dev/null && echo '±' && return
-        echo '%#'
-}
-
 function get_nr_jobs() {
   repeat $(jobs | wc -l) printf '▶'
 }
@@ -31,6 +24,16 @@ solarized_green=$'\e[0;32m'
 
 dir_tint=$solarized_blue
 jobs_tint=$solarized_green
+root_tint=$solarized_magenta
+
+function prompt_char {
+	if [ $UID -eq 0 ]; then echo "%{$root_tint%}#%{$reset_color%}" && return;
+	fi
+        git branch >/dev/null 2>/dev/null && echo '±' && return
+        echo '%#'
+}
+
+
 
 # newline
 PROMPT=$'
