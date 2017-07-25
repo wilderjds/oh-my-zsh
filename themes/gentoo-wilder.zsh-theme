@@ -33,7 +33,7 @@ function prompt_char {
         echo '%#'
 }
 
-
+# TODO tint the vertical line on bad exit status
 
 # newline
 PROMPT=$'
