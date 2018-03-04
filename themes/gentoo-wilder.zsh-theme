@@ -42,7 +42,7 @@ PROMPT=$'
 # add username only from remote
 [[ "$SSH_CONNECTION" != '' ]] && PROMPT+=$'%(!.%{\e[0;34m%}%}.%{\e[0;32m%}%}%n@)%m '
 
-PROMPT+=$'%{$dir_tint%}%(!.%1~.%~)%{$reset_color%}$(git_prompt_info)$(git_commits_ahead)%_
+PROMPT+=$'%{$dir_tint%}%(!.%1~.%~)%{$reset_color%}$(git_prompt_info)$(git_commits_ahead)$(git_commits_behind)%_
 %{\033[1;32m%}│ $(prompt_char)%{$reset_color%} '
 
 RPROMPT=$'%{$jobs_tint%}$(get_nr_jobs)%{$reset_color%}'
@@ -54,3 +54,5 @@ ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[green]%}?"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
 ZSH_THEME_GIT_COMMITS_AHEAD_PREFIX="%{\033[0;36m%} "
 ZSH_THEME_GIT_COMMITS_AHEAD_SUFFIX="↑%{$fg_bold[blue]%}"
+ZSH_THEME_GIT_COMMITS_BEHIND_PREFIX="%{\033[0;36m%} "
+ZSH_THEME_GIT_COMMITS_BEHINDu_SUFFIX="↑%{$fg_bold[blue]%}"
