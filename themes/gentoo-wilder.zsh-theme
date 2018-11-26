@@ -1,6 +1,8 @@
 #! /bin/zsh
+
+# I am not sure why one needs to grep, but otherwise some jobs are counted twice.
 function get_nr_jobs() {
-  repeat $(jobs | wc -l) printf '▶'
+  repeat $(jobs | grep "\[" | wc -l) printf '▶'
 }
 
 # Solarized
