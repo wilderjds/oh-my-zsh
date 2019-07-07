@@ -35,17 +35,17 @@ function prompt_char {
         echo '%#'
 }
 
-# TODO tint the vertical line on bad exit status
-
 # newline
-PROMPT=$'
-%{\033[1;32m%}│%{$reset_color%} '
+return_code_vertical="%(?.%{$solarized_base00%}.%{$solarized_magenta%})│%{$reset_color%} "
+
+PROMPT="
+$return_code_vertical"
 
 # add username only from remote
 [[ "$SSH_CONNECTION" != '' ]] && PROMPT+=$'%(!.%{\e[0;34m%}%}.%{\e[0;32m%}%}%n@)%m '
 
 PROMPT+=$'%{$dir_tint%}%(!.%1~.%~)%{$reset_color%}$(git_prompt_info)$(git_commits_ahead)$(git_commits_behind)%_
-%{\033[1;32m%}│ $(prompt_char)%{$reset_color%} '
+${return_code_vertical}$(prompt_char)%{$reset_color%} '
 
 RPROMPT=$'%{$jobs_tint%}$(get_nr_jobs)%{$reset_color%}'
 
