@@ -36,7 +36,7 @@ function prompt_char {
 }
 
 # newline
-return_code_vertical="%(?.%{$solarized_base00%}.%{$solarized_magenta%})│%{$reset_color%} "
+return_code_vertical="%(?.%{$reset_color%}.%{$solarized_magenta%})│%{$reset_color%} "
 
 PROMPT="
 $return_code_vertical"
