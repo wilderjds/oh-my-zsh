@@ -74,8 +74,8 @@ function _add_identities() {
   fi
 
   # pass extra arguments to ssh-add
-  local args
-  zstyle -a :omz:plugins:ssh-agent ssh-add-args args
+  # local args
+  # zstyle -a :omz:plugins:ssh-agent ssh-add-args args
 
   # if ssh-agent quiet mode, pass -q to ssh-add
   zstyle -t :omz:plugins:ssh-agent quiet && args=(-q $args)
@@ -93,7 +93,7 @@ function _add_identities() {
     fi
   fi
 
-  ssh-add "${args[@]}" ${^not_loaded}
+  # Ssh-add "${args[@]}" ${^not_loaded}
 }
 
 # Add a nifty symlink for screen/tmux if agent forwarding is enabled
