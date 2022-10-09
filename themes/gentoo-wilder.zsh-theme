@@ -1,9 +1,6 @@
 #! /bin/zsh
 
-# I am not sure why one needs to grep, but otherwise some jobs are counted twice.
-function get_nr_jobs() {
-  repeat $(jobs | grep "\[" | wc -l) printf '▶'
-}
+jobs_marker=(         )
 
 # Solarized
 solarized_base03=$'\e[1;30m'
@@ -47,7 +44,7 @@ $return_code_vertical"
 PROMPT+=$'%{$dir_tint%}%(!.%1~.%~)%{$reset_color%}$(git_prompt_info)$(git_commits_ahead)$(git_commits_behind)%_
 ${return_code_vertical}$(prompt_char)%{$reset_color%} '
 
-RPROMPT=$'%{$jobs_tint%}$(get_nr_jobs)%{$reset_color%}'
+RPROMPT=$'%{$jobs_tint%}$jobs_marker[${(%):-%j}]%{$reset_color%}'
 
 ZSH_THEME_GIT_PROMPT_PREFIX="%{\033[1;32m%} · %{\033[0;36m%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$fg_bold[blue]%}"
