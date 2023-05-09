@@ -28,20 +28,29 @@ root_tint=$solarized_magenta
 function prompt_char {
 	if [ $UID -eq 0 ]; then echo "%{$root_tint%}#%{$reset_color%}" && return;
 	fi
-        git branch >/dev/null 2>/dev/null && echo '±' && return
-        echo '%#'
+    is_curr_dir_remote || {git branch >/dev/null 2>/dev/null && echo '±' && return}
+    echo '%#'
 }
 
-# newline
-return_code_vertical="%(?.%{$reset_color%}.%{$solarized_magenta%})│%{$reset_color%} "
+function is_curr_dir_remote {
+    [[ $(pwd) =~ .*nextcloud.* ]]
+}
+
+function git_stuff {
+    is_curr_dir_remote || echo -n $(git_prompt_info)$(git_commits_ahead)$(git_commits_behind)
+}
+
+# newline ⎡⎧⎛⎢
+return_code_vertical_top="%(?.%{$reset_color%}.%{$solarized_magenta%})⎥%{$reset_color%} "
+return_code_vertical="%(?.%{$reset_color%}.%{$solarized_magenta%})⎥%{$reset_color%} "
 
 PROMPT="
-$return_code_vertical"
+$return_code_vertical_top"
 
 # add username only from remote
 [[ "$SSH_CONNECTION" != '' ]] && PROMPT+=$'%(!.%{\e[0;34m%}%}.%{\e[0;32m%}%}%n@)%m '
 
-PROMPT+=$'%{$dir_tint%}%(!.%1~.%~)%{$reset_color%}$(git_prompt_info)$(git_commits_ahead)$(git_commits_behind)%_
+PROMPT+=$'%{$dir_tint%}%(!.%1~.%~)%{$reset_color%}$(git_stuff)%_
 ${return_code_vertical}$(prompt_char)%{$reset_color%} '
 
 RPROMPT=$'%{$jobs_tint%}$jobs_marker[${(%):-%j}]%{$reset_color%}'
