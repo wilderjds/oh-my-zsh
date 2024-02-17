@@ -252,6 +252,9 @@ if LANG= git pull --quiet --rebase $remote $branch; then
     # Save the commit prior to updating
     git config oh-my-zsh.lastVersion "$last_commit"
 
+    # Push to fork
+    git push --force origin $branch
+
     # Print changelog to the terminal
     if [[ $interactive == true && $verbose_mode == default ]]; then
       "$ZSH/tools/changelog.sh" HEAD "$last_commit"
