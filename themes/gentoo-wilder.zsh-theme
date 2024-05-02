@@ -64,3 +64,9 @@ ZSH_THEME_GIT_COMMITS_AHEAD_PREFIX="%{\033[0;36m%} "
 ZSH_THEME_GIT_COMMITS_AHEAD_SUFFIX="↑%{$fg_bold[blue]%}"
 ZSH_THEME_GIT_COMMITS_BEHIND_PREFIX="%{\033[0;36m%} "
 ZSH_THEME_GIT_COMMITS_BEHIND_SUFFIX="↓%{$fg_bold[blue]%}"
+
+# This is needed to have the async branch prompt working properly.
+# the reason why it does not work out of the box is that we use the
+# wrapper git_stuff in our prompt instead of the plain git_prompt_info.
+
+_omz_register_handler _omz_git_prompt_info
