@@ -10,7 +10,7 @@ function get_nr_jobs() {
 }
 
 PROMPT='
-%(!.%{$fg_bold[red]%}.%{$fg_bold[green]%}%n@)%m %{$fg_bold[blue]%}%(!.%1~.%~)$(git_prompt_info)$(git_commits_ahead)%_
+%(!.%{$fg_bold[red]%}.%{$fg_bold[green]%}%n@)%m %{$fg_bold[blue]%}%(!.%1~.%~)$(git_prompt_info)$(git_commits_ahead)
 $(prompt_char)%{$reset_color%} '
 
 RPROMPT='%{$fg_bold[green]%}$(get_nr_jobs)%{$reset_color%}'
