@@ -50,7 +50,7 @@ $return_code_vertical_top"
 # add username only from remote
 [[ "$SSH_CONNECTION" != '' ]] && PROMPT+=$'%(!.%{\e[0;34m%}%}.%{\e[0;32m%}%}%n@)%m '
 
-PROMPT+=$'%{$dir_tint%}%(!.%1~.%~)%{$reset_color%}$(git_stuff)%_
+PROMPT+=$'%{$dir_tint%}%(!.%1~.%~)%{$reset_color%}$(git_stuff)
 ${return_code_vertical}$(prompt_char)%{$reset_color%} '
 
 RPROMPT=$'%{$jobs_tint%}$jobs_marker[${(%):-%j}]%{$reset_color%}'
