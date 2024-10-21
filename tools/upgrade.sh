@@ -253,7 +253,9 @@ if LANG= git pull --quiet --rebase $remote $branch; then
     git config oh-my-zsh.lastVersion "$last_commit"
 
     # Push to fork
-    git push --force origin $branch
+    if [[ $remote == upstream ]]; then
+      git push --force origin $branch
+    fi
 
     # Print changelog to the terminal
     if [[ $interactive == true && $verbose_mode == default ]]; then
