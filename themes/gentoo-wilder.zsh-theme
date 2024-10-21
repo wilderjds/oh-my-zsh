@@ -33,7 +33,7 @@ function prompt_char {
 }
 
 function is_curr_dir_remote {
-    [[ $(pwd) =~ .*nextcloud.* ]]
+    [[ $(pwd) =~ .*nextcloud.* ]] # ||     [[ $(pwd) =~ .*dropbox.* ]]
 }
 
 function git_stuff {
